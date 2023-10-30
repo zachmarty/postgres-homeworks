@@ -24,31 +24,14 @@ with open('homework-1/north_data/orders_data.csv', 'r', encoding='utf-8') as f:
     orders_data = [row for row in reader]
 
 for i in range(1, len(customers_data)):
-    cur.execute('insert into customers values(%s, %s, %s)', (
-        customers_data[i][0], 
-        customers_data[i][1], 
-        customers_data[i][2]
-    ))
+    cur.execute('insert into customers values(%s, %s, %s)', tuple(customers_data[i]))
 
 for i in range(1, len(employees_data)):
-    cur.execute('insert into employees values(%s, %s, %s, %s, %s, %s)', (
-        employees_data[i][0], 
-        employees_data[i][1], 
-        employees_data[i][2], 
-        employees_data[i][3], 
-        employees_data[i][4], 
-        employees_data[i][5]
-    ))
+    cur.execute('insert into employees values(%s, %s, %s, %s, %s, %s)', tuple(employees_data[i]))
 
 for i in range(1, len(orders_data)):
-    cur.execute('insert into orders values(%s, %s, %s, %s, %s)', (
-        orders_data[i][0],
-        orders_data[i][1],
-        orders_data[i][2],
-        orders_data[i][3],
-        orders_data[i][4],
-    ))
-conn.commit()
+    cur.execute('insert into orders values(%s, %s, %s, %s, %s)', tuple(orders_data[i]))
 
+conn.commit()
 cur.close()
 conn.close()
